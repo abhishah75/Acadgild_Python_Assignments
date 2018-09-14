@@ -1,0 +1,74 @@
+Assignment 4.1
+
+Write a Python Program(with class concepts) to find the area of the triangle using the below
+formula.
+class Polygon:
+
+    def __init__(self, n):
+        self.number_of_sides = n
+    
+    def print_num_sides(self):
+        '''a quick, informational print statement'''
+        print('There are ' + str(self.number_of_sides) + 'sides.')
+
+class Triangle(Polygon):
+
+    def __init__(self, lengths_of_sides):
+        Polygon.__init__(self, 3)
+        self.lengths_of_sides = lengths_of_sides  # list of three numbers
+    
+    def get_area(self):
+        '''return the area of the triangle using the semi-perimeter method'''
+        a, b, c = self.lengths_of_sides
+        
+        # calculate the semi-perimeter
+        s = (a + b + c) / 2
+        return (s*(s-a)*(s-b)*(s-c)) ** 0.5
+Output:
+
+>>> tri = Triangle([3, 4, 5])
+>>> print(tri.get_area())
+6.0
+>>> tri.print_num_sides()
+3
+**********************************************************
+Write a function filter_long_words() that takes a list of words and an integer n and returns
+the list of words that are longer than n.
+
+def filterlongword(string,number):
+    listwords = []
+    for i in range(len(string)):
+        if len(string[i]) > number:
+            listwords.append(string[i])
+    return listwords
+And a nicer version using list comprehension:
+
+def filterlongword(string,number):
+    return [word for word in string if len(word) > number]
+To split the input string into a list of words, use
+
+words = input("Please input the list of words: ").split()
+
+******************************************
+
+Write a Python program using function concept that maps list of words into a list of integers
+representing the lengths of the corresponding words.
+
+def find_longest_word(text):
+    for words in text.split():
+        if len(words) > longest:
+            longest = len(words)
+            longest_word = words
+    return longest_word, len(longest_word)
+
+def main():
+    input_string = input("Please input a list of words to evaluate: ")
+    longest_word = find_longest_word(input_string)
+    print("The longest word is", longest_word, "with length", len(longest_word))
+The actual problem, you are trying to solve can be solved like this
+
+def find_longest_word(text):
+    longest_word = max(text.split(), key = len)
+    return longest_word, len(longest_word)
+******************************************************
+
