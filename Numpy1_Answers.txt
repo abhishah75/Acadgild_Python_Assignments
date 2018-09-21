@@ -1,0 +1,41 @@
+Write a function so that the columns of the output matrix are powers of the input
+vector.
+The order of the powers is determined by the increasing boolean argument. Specifically,
+when increasing is False, the i-th output column is the input vector raised element-wise
+to the power of N - i - 1.
+
+HINT: Such a matrix with a geometric progression in each row is named for Alexandre-
+Theophile Vandermonde.
+
+>>> x = np.array([1, 2, 3, 5])
+>>> N = 3
+>>> np.vander(x, N)
+array([[ 1,  1,  1],
+       [ 4,  2,  1],
+       [ 9,  3,  1],
+       [25,  5,  1]])
+>>>
+>>> np.column_stack([x**(N-1-i) for i in range(N)])
+array([[ 1,  1,  1],
+       [ 4,  2,  1],
+       [ 9,  3,  1],
+       [25,  5,  1]])
+>>>
+>>> x = np.array([1, 2, 3, 5])
+>>> np.vander(x)
+array([[  1,   1,   1,   1],
+       [  8,   4,   2,   1],
+       [ 27,   9,   3,   1],
+       [125,  25,   5,   1]])
+>>> np.vander(x, increasing=True)
+array([[  1,   1,   1,   1],
+       [  1,   2,   4,   8],
+       [  1,   3,   9,  27],
+       [  1,   5,  25, 125]])
+The determinant of a square Vandermonde matrix is the product of the differences between the values of the input vector:
+
+>>>
+>>> np.linalg.det(np.vander(x))
+48.000000000000043
+>>> (5-3)*(5-2)*(5-1)*(3-2)*(3-1)*(2-1)
+48
